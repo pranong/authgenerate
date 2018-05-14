@@ -22,23 +22,23 @@ app.post('/posts', (req, res) => {
 
     // Create Video Grant
     const videoGrant = new VideoGrant({
-    room: 'cool room',
+    room: 'DailyStandup',
     });
 
     // Create an access token which we will sign and return to the client,
     // containing the grant we just created
     const token = new AccessToken(twilioAccountSid, twilioApiKey, twilioApiSecret);
-    //token.addGrant(videoGrant);
+    token.addGrant(videoGrant);
     token.identity = identity;
 
     // Serialize the token to a JWT string
     
     console.log(identity);
-    console.log("AnyRoom@");
+    console.log("DailyStandup");
     console.log(token.toJwt());
   res.send(
     [{
-      title: identity,
+      title: token.identity,
       room: "Any Room",
       token: token.toJwt()
     }]
